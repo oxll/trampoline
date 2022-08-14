@@ -1,60 +1,45 @@
-let n = 50; // number of segments on one side
-let b = 10; // segment length
-let a; // space between segments
+function setup() {
+    createCanvas(window.innerWidth, window.innerHeight);
+  }
+  
+function draw() {
 
-if (n !== 1) {
-a = (74.75-(b*0.25))/((n*0.25)-0.25);
-} else if (n === 1) {
-a = (74.75-(b*0.25))/((n*0.5)-0.25);
-}
+    background(255);
 
-for (let i = 0; i < n; i++) {
+    let n = 50; // number of segments on each side
+    let b = 5; // segment length
+    let a; // space between segments that automatically changes to fit square
     
-    strokeWeight(2);
-    stroke(255, 125, 0);
+      if (n !== 1) {
+      a = (74.75 - (b * 0.25)) / ((n * 0.25) - 0.25);
+    } else if (n === 1) {
+      a = (74.75 - (b * 0.25)) / ((n * 0.5) - 0.25);
+  }
     
-    line(50, a*i+50, 50, a*i+b+50); // side i
-    line(a*i+50, 349.5, a*i+b+50, 349.5); // side ii
-    line(350, 399-(a*i+50), 350, 399-(a*i+50)-b); // side iii
-    line(399-(a*i+50), 50, (399-(a*i+50))-b, 50); // side iv
+    let tWidth = a * (n - 1) + b;
+    let tHeight = tWidth;
+  
+    for (var i = 0; i < n; i++) {
+        
+        stroke(255, 0, 0);
+        strokeWeight(4);
+        
+        translate(window.innerWidth/2 - tWidth/2, window.innerHeight/2 - tHeight/2);
+        
+        strokeWeight(2);
+        stroke(255, 125, 0);
+        
+        line(0, a * i, 0, a * i + b); // side i
+        line(a * i, 299.5, a * i + b, 299.5); // side ii
+        line(300, 349 - (a * i + 50), 300, 349 - (a * i + 50) - b); // side iii
+        line(349 - (a * i + 50), 0, 349 - (a * i + 50) - b, 0); // side iv
+        
+        line(0, a * i + (b / 2), a * i + (b / 2), 299.5); // web i
+        line(a * i + (b / 2), 299.5, 300, 349 - (a * i + 50) - (b / 2)); // web ii
+        line(300, 349 - (a * i + 50) - (b / 2), 349 - (a * i + 50) - (b / 2), 0); // web iii
+        line(349 - (a * i + 50) - (b / 2), 0, 0, a * i + (b / 2)); // web iv
+
+        resetMatrix();
     
-    line(50, a*i+50+(b/2), a*i+50+(b/2), 349.5); // web i
-    line(a*i+50+(b/2), 349.5, 350, 399-(a*i+50)-(b/2)); // web ii
-    line(350, 399-(a*i+50)-(b/2), 399-(a*i+50)-(b/2), 50); // web iii
-    line(399-(a*i+50)-(b/2), 50, 50, a*i+50+(b/2)); // web iv
-
-}
-
-fill(225, 225, 225);
-
-textSize(200);
-textFont(createFont("monoscript"));
-
-if (n === 0) {
-    text("D:", 25, 200);
-    textSize(20);
-    text("seriously? zero segments?\nwhat did you think was going to happen?\n\nnow i'm sad and it's all your fault :(", 25, 250);
-}
-
-textSize(200);
-
-if (n < 0) {
-    text("D:<", 25, 175);
-    textSize(20);
-    text("you really wanted a negative number\nof segments, huh??\nwell, i won't let you have a\nnegative square. >:(\n\nnot even for your birthday :(", 25, 250);
-}
-
-textSize(200);
-
-if (abs(n % 1) !== 0) {
-    background(255, 255, 255);
-    text("\\ö/", 25, 175);
-    textSize(20);
-    text("HOW THE HECK AM I SUPPOSED TO\nSPLIT A SQUARE UP INTO ", 25, 225);
-    textSize(50);
-    text(n.toString(), 25, 302.5);
-    textSize(20);
-    textLeading(28);
-    text("\nSEGMENTS, HUH?", 25, 302.5);
-    text("\n\n\nwhy so mean :'(", 25, 300);
-}
+    }
+  }
