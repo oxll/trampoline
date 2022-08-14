@@ -1,5 +1,3 @@
-import Paddle from "/src/paddle.js";
-
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
   }
